@@ -5,7 +5,8 @@
     "strict": true,
     "esModuleInterop": true,
     "declaration": true,
-    "noEmit": true
+    "noEmit": true,
+    "skipLibCheck": true
   },
   "include": ["scripts", "tests", "deploy", "utils", "lib"],
   "files": ["hardhat.config.ts"]

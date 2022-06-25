@@ -1,5 +1,5 @@
 {
-  "name": "@demoslabs/api",
+  "name": "@ginft/api",
   "private": true,
   "scripts": {
     "dev": "concurrently -n mongo,next,prisma-client,graphql-schema,prisma-studio 'pnpm dev:mongo' 'sleep 5; pnpm dev:next' 'pnpm dev:prisma-client' 'sleep 5; pnpm dev:graphql-schema' 'pnpm dev:prisma-studio'",
@@ -22,8 +22,8 @@
     "clean:mongo": "cd mongodb; ./clean.sh"
   },
   "dependencies": {
-    "@demoslabs/smart-contracts": "^1.0.29",
-    "@demoslabs/web3token": "workspace:^1.0.0",
+    "@ginft/contracts": "workspace:^1.0.0",
+    "@ginft/web3token": "workspace:^1.0.0",
     "@prisma/client": "^3.8.1",
     "apollo-server-micro": "^3.6.1",
     "axios": "^0.24.0",

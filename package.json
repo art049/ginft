@@ -14,7 +14,6 @@
     "clean": "pnpm -r --parallel clean",
     "dev": "pnpm clean && pnpm -r --parallel dev",
     "format": "prettier --write .",
-    "link:smart-contracts": "pnpm -r --parallel link:smart-contracts",
     "lint": "pnpm -r --parallel lint",
     "prepare": "husky install",
     "app": "pnpm --filter app",

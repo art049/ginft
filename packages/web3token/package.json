@@ -1,5 +1,5 @@
 {
-  "name": "@demoslabs/web3token",
+  "name": "@ginft/web3token",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
