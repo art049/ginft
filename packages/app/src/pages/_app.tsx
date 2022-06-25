@@ -7,10 +7,7 @@ import { WalletProvider } from "src/hooks/useWallet";
 import { theme } from "src/theme";
 import { ErrorCatcher } from "../components/ErrorBoundary";
 import "../global.css";
-import { AssetsProvider } from "../hooks/useAssets";
-import { ContractsProvider } from "../hooks/useContracts";
 import { TransactionProvider } from "../hooks/useTransaction";
-import { VenturesProvider } from "../hooks/useVentures";
 import { apolloClient } from "../utils/apolloClient";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -22,17 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={theme}>
         <ErrorCatcher>
           <WalletProvider>
-            <ContractsProvider>
-              <AssetsProvider>
-                <VenturesProvider>
-                  <ApolloProvider client={apolloClient}>
-                    <TransactionProvider>
-                      <Component {...pageProps} />
-                    </TransactionProvider>
-                  </ApolloProvider>
-                </VenturesProvider>
-              </AssetsProvider>
-            </ContractsProvider>
+            <ApolloProvider client={apolloClient}>
+              <TransactionProvider>
+                <Component {...pageProps} />
+              </TransactionProvider>
+            </ApolloProvider>
           </WalletProvider>
         </ErrorCatcher>
       </ChakraProvider>

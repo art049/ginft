@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
 import { BatchHttpLink } from "@apollo/client/link/batch-http";
-import { encodeWeb3Token } from "@demoslabs/web3token";
+import { encodeWeb3Token } from "@ginft/web3token";
 import { staticConfig } from "../config";
 
 const httpLink = new BatchHttpLink({

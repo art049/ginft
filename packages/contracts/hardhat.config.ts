@@ -64,6 +64,7 @@ const config: HardhatUserConfig = {
     // network used when running "hardhat node".
     localhost: {
       url: "http://localhost:8545",
+      chainId: 1337,
     },
     demos: {
       mining: {

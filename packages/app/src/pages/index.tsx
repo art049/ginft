@@ -1,55 +1,36 @@
-import { Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Input, SimpleGrid, Skeleton, VStack } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import { Portfolio } from "src/components/Portfolio";
-import { ClaimableCard } from "src/components/UserStatCard/ClaimableCard";
-import { InvitationsCard } from "src/components/UserStatCard/InvitationsCard";
-import { PortfolioCard } from "src/components/UserStatCard/PortfolioCard";
+import { PrimaryButton } from "src/components/Button";
+import { useUserNFTs } from "src/hooks/useUserNFTs";
 import Layout from "../components/Layout";
-import { OngoingOffers } from "../components/OngoingOffers";
-import { StakedFunds } from "../components/StakedFunds";
-import { Ventures } from "../components/Ventures";
 
 const Home: NextPage = () => {
+  const { isLoaded, tokens } = useUserNFTs();
   return (
     <Layout>
-      <Flex direction="row" w="100%">
-        <Grid
-          templateRows={{
-            xs: "repeat(6, 1fr)",
-            sm: "repeat(5, 1fr)",
-            xl: "repeat(3, 1fr)",
-          }}
-          templateColumns={{
-            xs: "repeat(1, 1fr)",
-            sm: "repeat(2, 1fr)",
-            xl: "repeat(3, 1fr)",
-          }}
-          gap={4}
-          w="100%"
-        >
-          <GridItem
-            rowSpan={3}
-            colSpan={{
-              xs: 1,
-              sm: 2,
-            }}
-          >
-            <StakedFunds />
-          </GridItem>
-          <GridItem colSpan={1}>
-            <ClaimableCard />
-          </GridItem>
-          <GridItem colSpan={1}>
-            <PortfolioCard />
-          </GridItem>
-          <GridItem colSpan={1}>
-            <InvitationsCard />
-          </GridItem>
-        </Grid>
-      </Flex>
-      <OngoingOffers />
-      <Portfolio />
-      <Ventures />
+      <VStack>
+        <SimpleGrid columns={2} spacing={10}>
+          {isLoaded
+            ? tokens.map((token) => (
+                <Box
+                  bg="tomato"
+                  height="100px"
+                  width="100px"
+                  key={token.tokenId.toNumber()}
+                >
+                  {token.tokenId}
+                </Box>
+              ))
+            : [
+                <Skeleton height="100px" width="100px"></Skeleton>,
+                <Skeleton height="100px" width="100px"></Skeleton>,
+                <Skeleton height="100px" width="100px"></Skeleton>,
+              ]}
+        </SimpleGrid>
+
+        <Input placeholder="Giftee address" />
+        <PrimaryButton>Mint Gift</PrimaryButton>
+      </VStack>
     </Layout>
   );
 };

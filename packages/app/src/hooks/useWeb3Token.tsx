@@ -1,8 +1,4 @@
-import {
-  requestWeb3Token,
-  verifyWeb3Token,
-  Web3Token,
-} from "@demoslabs/web3token";
+import { requestWeb3Token, verifyWeb3Token, Web3Token } from "@ginft/web3token";
 import { useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import { useWallet } from "./useWallet";

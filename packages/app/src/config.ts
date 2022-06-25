@@ -1,12 +1,12 @@
-import deployments from "@demoslabs/smart-contracts/dist/deployments.json";
+import deployments from "@ginft/contracts/dist/deployments.json";
 
-const demosContracts = deployments[1338].demos.contracts;
+// const demosContracts = deployments[1338].demos.contracts;
 const localhostContracts = deployments[31337].hardhat.contracts;
 
 interface StaticConfig {
   blockNativeAPIKey: string;
   chainID: number;
-  contracts: typeof demosContracts | typeof localhostContracts;
+  contracts: typeof localhostContracts;
   graphqlEndpoint: string;
   infuraKey: string;
   networkName: "Demos" | "Localhost";
@@ -29,18 +29,18 @@ const getStaticConfig = (): StaticConfig => {
     infuraKey,
   };
 
-  if (process.env.NEXT_PUBLIC_ENV === "preview") {
-    return {
-      ...baseConfig,
-      chainID: 1338,
-      networkName: "Demos",
-      contracts: demosContracts,
-      graphqlEndpoint: "https://preview.api.demos.ventures/api/graphql",
-    };
-  }
+  // if (process.env.NEXT_PUBLIC_ENV === "preview") {
+  //   return {
+  //     ...baseConfig,
+  //     chainID: 1338,
+  //     networkName: "Demos",
+  //     contracts: demosContracts,
+  //     graphqlEndpoint: "https://preview.api.demos.ventures/api/graphql",
+  //   };
+  // }
   return {
     ...baseConfig,
-    chainID: 31337,
+    chainID: 1337,
     networkName: "Localhost",
     contracts: localhostContracts,
     graphqlEndpoint: "http://localhost:3001/api/graphql",
