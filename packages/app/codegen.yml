@@ -1,0 +1,38 @@
+schema: "../api/generated/schema.gql"
+documents:
+  - "./src/queries/*.gql"
+
+overwrite: true
+
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+
+generates:
+  # Types
+  generated/graphql/types.tsx:
+    plugins:
+      - typescript
+    config:
+      skipTypename: true
+  # Operations
+  generated/graphql/operations.tsx:
+    preset: import-types
+    presetConfig:
+      typesPath: ./types
+    plugins:
+      - typescript-operations
+    config:
+      skipTypename: true
+  # Hooks
+  generated/graphql/hooks.tsx:
+    preset: import-types
+    presetConfig:
+      typesPath: ./operations
+    plugins:
+      - typescript-react-apollo
+    config:
+      skipTypename: true
+      withHOC: false
+      withComponent: false
+      withHooks: true

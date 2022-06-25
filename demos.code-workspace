@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "Root"
+    },
+    {
+      "path": "packages/app",
+      "name": "APP"
+    },
+    {
+      "path": "packages/api",
+      "name": "API"
+    },
+    {
+      "path": "../smart-contracts",
+      "name": "Contracts"
+    }
+  ],
+  "settings": {}
+}

@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+  mongo:
+    container_name: mongo
+    image: "mongo:${MONGODB_VERSION:-latest}"
+    command: mongod --quiet --logpath /dev/null --port 27017 --replSet demos-dev-set
+    volumes:
+      - ./:/scripts
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo_data: null

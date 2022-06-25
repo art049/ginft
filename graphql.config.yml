@@ -1,0 +1,5 @@
+schema: packages/api/generated/schema.gql
+extensions:
+  endpoints:
+    default:
+      url: http://localhost:3001/api/graphql

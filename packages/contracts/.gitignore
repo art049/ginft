@@ -1,0 +1,18 @@
+# General
+.DS_Store
+.env
+node_modules
+yarn-error.log
+
+# Project
+dist
+cache
+artifacts
+coverage
+coverage.json
+typechain
+deployments/localhost
+deployments/hardhat
+
+pnpm-global
+deployments.json

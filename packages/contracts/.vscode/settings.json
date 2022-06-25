@@ -1,0 +1,9 @@
+{
+  "mochaExplorer.files": "tests/**/*.{j,t}s",
+  "mochaExplorer.autoload": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  }
+}

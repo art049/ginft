@@ -1,0 +1,30 @@
+{
+  "name": "demos",
+  "version": "1.0.0",
+  "description": "Demos monorepo",
+  "repository": "git@github.com:DemosLabs/demos.git",
+  "author": "Demos Labs",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=14.17.0"
+  },
+  "scripts": {
+    "build": "pnpm build --filter web3token && pnpm -r --parallel build --filter api --filter app",
+    "clean": "pnpm -r --parallel clean",
+    "dev": "pnpm clean && pnpm -r --parallel dev",
+    "format": "prettier --write .",
+    "link:smart-contracts": "pnpm -r --parallel link:smart-contracts",
+    "lint": "pnpm -r --parallel lint",
+    "prepare": "husky install",
+    "app": "pnpm --filter app",
+    "api": "pnpm --filter api",
+    "web3": "pnpm --filter web3token"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "prettier-plugin-prisma": "^3.9.0"
+  }
+}
