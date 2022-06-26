@@ -1,24 +1,26 @@
-# Monorepo Template
+# GiNFT: ETHNYC2022 Hackathon Project
 
 ## Setup
 
-Link smart-contracts local repo:
+Install dependencies
 
 ```shell
-pnpm -r link:smart-contracts
+pnpm install
 ```
 
-### Authenticate to the Github NPM Registry
+Run the contracts deployed on a local chain
 
 ```shell
-npm login --scope=@demoslabs --registry=https://npm.pkg.github.com
+cd packages/contracts
+pnpm dev
 ```
 
-Connection details:
+Run the frontend
 
-- Username: your github username
-- Password: a github personal access token with the `repo` and `read:packages` scopes
-- Email: your github email
+```shell
+cd packages/app
+pnpm dev
+```
 
 # Setup Lima instead of docker
 
