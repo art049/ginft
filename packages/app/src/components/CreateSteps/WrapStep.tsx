@@ -25,7 +25,7 @@ const WrapStep = (props: PickStepsProps) => {
         props.customizationData?.message ?? "" + "\nA gift built with GiNFT.",
       external_url: staticConfig.frontBaseUrl,
       image:
-        "ipfs://bafkreicdeqoh3lrhdj35m6svdfmbonhdx22grupie5vxkzhsdyncimo6bq",
+        "ipfs://bafkreidazg456amd3yheefnzobhq4ufeagnlw4e57d52kbuormvunhvi5q",
     });
     if (props.nftToWrap && props.customizationData) {
       const unwrapUrl = await wrap(

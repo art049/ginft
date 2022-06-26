@@ -63,6 +63,7 @@ const RevealPage: NextPage = () => {
               src={`https://ipfs.io/ipfs/${metadata.image.slice(
                 "ipfs://".length
               )}`}
+              maxH="400px"
             />
             <Text fontWeight="bold">{metadata.name}</Text>
             <Text fontStyle="italic">{metadata.description}</Text>
@@ -74,6 +75,7 @@ const RevealPage: NextPage = () => {
               src={`https://ipfs.io/ipfs/${unwrappedMetadata.image.slice(
                 "ipfs://".length
               )}`}
+              maxH="400px"
             />
             <Text fontWeight="bold">{unwrappedMetadata.name}</Text>
             <Text fontStyle="italic">{unwrappedMetadata.description}</Text>
