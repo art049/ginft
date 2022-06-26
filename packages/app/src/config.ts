@@ -11,6 +11,7 @@ interface StaticConfig {
   infuraKey: string;
   networkName: "Demos" | "Localhost";
   rpcURL: string;
+  frontBaseUrl: string;
 }
 
 const getStaticConfig = (): StaticConfig => {
@@ -23,10 +24,14 @@ const getStaticConfig = (): StaticConfig => {
   const infuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
   if (!infuraKey) throw new Error("No InfuraKey");
 
+  const frontBaseUrl = process.env.NEXT_PUBLIC_FRONT_BASEURL;
+  if (!frontBaseUrl) throw new Error("No front base url");
+
   const baseConfig = {
     blockNativeAPIKey,
     rpcURL,
     infuraKey,
+    frontBaseUrl,
   };
 
   // if (process.env.NEXT_PUBLIC_ENV === "preview") {
