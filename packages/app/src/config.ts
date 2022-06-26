@@ -1,12 +1,12 @@
 import deployments from "@ginft/contracts/dist/deployments.json";
 
 // const demosContracts = deployments[1338].demos.contracts;
-const localhostContracts = deployments[31337].hardhat.contracts;
-
+// const localhostContracts = deployments[31337].hardhat.contracts;
+const mumbaiContracts = deployments[80001].mumbai.contracts;
 interface StaticConfig {
   blockNativeAPIKey: string;
   chainID: number;
-  contracts: typeof localhostContracts;
+  contracts: typeof mumbaiContracts;
   graphqlEndpoint: string;
   infuraKey: string;
   networkName: "Demos" | "Localhost";
@@ -39,20 +39,11 @@ const getStaticConfig = (): StaticConfig => {
     frontBaseUrl,
   };
 
-  // if (process.env.NEXT_PUBLIC_ENV === "preview") {
-  //   return {
-  //     ...baseConfig,
-  //     chainID: 1338,
-  //     networkName: "Demos",
-  //     contracts: demosContracts,
-  //     graphqlEndpoint: "https://preview.api.demos.ventures/api/graphql",
-  //   };
-  // }
   return {
     ...baseConfig,
-    chainID: 1337,
+    chainID: 80001,
     networkName: "Localhost",
-    contracts: localhostContracts,
+    contracts: deployments[80001].mumbai.contracts,
     graphqlEndpoint: "http://localhost:3001/api/graphql",
   };
 };

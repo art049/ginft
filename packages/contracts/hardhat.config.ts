@@ -49,8 +49,15 @@ const config: HardhatUserConfig = {
       chainId: 4,
     },
     mumbai: {
-      ...baseLiveNetwork,
+      timeout: 120000,
+      live: false,
+      saveDeployments: true,
       chainId: 80001,
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: {
+        mnemonic:
+          "fortune patrol torch maximum zoo access start dish ghost dinosaur chalk glue drive program insect",
+      },
     },
     polygon: {
       ...baseLiveNetwork,

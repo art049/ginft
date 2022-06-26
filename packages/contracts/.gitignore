@@ -5,14 +5,14 @@ node_modules
 yarn-error.log
 
 # Project
-dist
+# dist
 cache
 artifacts
 coverage
 coverage.json
-typechain
+# typechain
 deployments/localhost
 deployments/hardhat
 
 pnpm-global
-deployments.json
+# deployments.json
