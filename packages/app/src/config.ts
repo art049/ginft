@@ -41,9 +41,9 @@ const getStaticConfig = (): StaticConfig => {
 
   return {
     ...baseConfig,
-    chainID: 80001,
+    chainID: 69,
     networkName: "Localhost",
-    contracts: deployments[80001].mumbai.contracts,
+    contracts: deployments[69].optimismkovan.contracts,
     graphqlEndpoint: "http://localhost:3001/api/graphql",
   };
 };

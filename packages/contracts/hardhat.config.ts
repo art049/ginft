@@ -63,6 +63,17 @@ const config: HardhatUserConfig = {
       ...baseLiveNetwork,
       chainId: 137,
     },
+    optimismkovan: {
+      chainId: 69,
+      timeout: 120000,
+      live: false,
+      saveDeployments: true,
+      url: "https://kovan.optimism.io",
+      accounts: {
+        mnemonic:
+          "fortune patrol torch maximum zoo access start dish ghost dinosaur chalk glue drive program insect",
+      },
+    },
     // network used during the tests and package build
     hardhat: {
       live: false,
