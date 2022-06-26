@@ -9,13 +9,13 @@ const FinalStep = (props: FinalStepProps) => {
   return (
     <StepContent>
       <StepHeading>
-        <StepHeading.Header>Congratulation !</StepHeading.Header>
+        <StepHeading.Header>Congratulations !</StepHeading.Header>
         <StepHeading.SubHeader>
           Your gift is retained in our northpole warehouse...
         </StepHeading.SubHeader>
       </StepHeading>
 
-      <VStack>
+      <VStack p={6}>
         <Text color="gray.500" fontSize="sm">
           Give this link to the recipient when they have to open the box
         </Text>

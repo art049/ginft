@@ -13,7 +13,9 @@ import { createContext, useContext } from "react";
 import { useWallet } from "./useWallet";
 
 export const TransactionContext = createContext<TransactionContext>({
-  track: () => () => {},
+  track: () => {
+    throw Error("not yet initialized");
+  },
 });
 
 export const useTransaction = () => useContext(TransactionContext);
@@ -75,7 +77,7 @@ interface TransactionContext {
   track: (
     scope: string,
     transaction: Promise<ContractTransaction>
-  ) => ContractReceipt;
+  ) => Promise<ContractReceipt>;
 }
 
 const LoadingToast: React.FC<any> = (props) => {

@@ -1,4 +1,6 @@
+import axios from "axios";
 import { BigNumber, utils } from "ethers";
+import { staticConfig } from "./config";
 
 export const storeGlobal = (name: string, value: any) => {
   if (typeof window !== "undefined") {
@@ -35,4 +37,18 @@ export const formatBigNumber = (
   decimals = 2
 ) => {
   return formatNumber(toNumber(bigNumber, isUnits), decimals);
+};
+
+export const uploadObjectToIpfs = async (
+  data: Record<any, any>
+): Promise<string> => {
+  const s = JSON.stringify(data);
+  const res = await axios.post("https://api.nft.storage/upload", s, {
+    headers: {
+      Authorization: `Bearer ${staticConfig.nftStorageKey}`,
+      "Content-Type": "application/json",
+    },
+  });
+  const cid = res.data?.value?.cid as string;
+  return cid;
 };

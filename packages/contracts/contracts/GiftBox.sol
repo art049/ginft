@@ -21,13 +21,17 @@ contract GiftBox is ERC721URIStorage {
   mapping(bytes32 => NFT) private _NFTByUnlockingSecret;
 
   event GiftMinted(address sender, address giftee, uint256 tokenId);
+  event GiftOpened(uint256 giftId, address tokenContract, uint256 tokenId);
 
   constructor() ERC721("GiftBox", "GFT") {}
 
-  function mint(address giftee) public returns (uint256) {
+  function mint(address giftee, string memory tokenURI)
+    public
+    returns (uint256)
+  {
     uint256 newGiftId = _tokenIds.current();
     _mint(giftee, newGiftId);
-    // _setTokenURI(newGiftId, tokenURI);
+    _setTokenURI(newGiftId, tokenURI);
     _gifter[newGiftId] = msg.sender;
     _tokenIds.increment();
     emit GiftMinted(msg.sender, giftee, newGiftId);
@@ -82,5 +86,6 @@ contract GiftBox is ERC721URIStorage {
     _isOpened[giftId] = true;
     delete _NFTByUnlockingSecret[hashedSecret];
     delete _nftOwner[claim.tokenContract][claim.tokenId];
+    emit GiftOpened(giftId, claim.tokenContract, claim.tokenId);
   }
 }

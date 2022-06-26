@@ -1,4 +1,5 @@
 import { HappyApes__factory } from "@ginft/contracts/dist/typechain";
+import { BigNumber } from "ethers";
 import { createContext, useContext, useEffect, useState } from "react";
 import { staticConfig } from "src/config";
 import { useWallet } from "./useWallet";
@@ -60,7 +61,7 @@ export const UserNFTsProvider: React.FC = ({ children }) => {
 
 interface UserNFT {
   contractAddress: string;
-  tokenId: number;
+  tokenId: BigNumber;
 }
 
 interface UserNFTsContext {

@@ -1,13 +1,10 @@
 import { Flex, Text, VStack } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import CreateSteps from "src/components/CreateSteps";
-import { useGiftBox } from "src/hooks/useGiftBox";
 import { useUserNFTs } from "src/hooks/useUserNFTs";
 import Layout from "../components/Layout";
-
 const Home: NextPage = () => {
   const { isLoaded, tokens } = useUserNFTs();
-  const { wrap } = useGiftBox();
   console.log(isLoaded, tokens);
   return (
     <Layout>

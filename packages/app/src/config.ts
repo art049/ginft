@@ -12,6 +12,7 @@ interface StaticConfig {
   networkName: "Demos" | "Localhost";
   rpcURL: string;
   frontBaseUrl: string;
+  nftStorageKey: string;
 }
 
 const getStaticConfig = (): StaticConfig => {
@@ -27,8 +28,12 @@ const getStaticConfig = (): StaticConfig => {
   const frontBaseUrl = process.env.NEXT_PUBLIC_FRONT_BASEURL;
   if (!frontBaseUrl) throw new Error("No front base url");
 
+  const nftStorageKey = process.env.NEXT_PUBLIC_NFTSTORAGEKEY;
+  if (!nftStorageKey) throw new Error("No Nft storage key");
+
   const baseConfig = {
     blockNativeAPIKey,
+    nftStorageKey,
     rpcURL,
     infuraKey,
     frontBaseUrl,

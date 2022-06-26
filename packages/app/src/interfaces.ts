@@ -10,3 +10,10 @@ export interface CustomizationData {
   name: string;
   message?: string;
 }
+
+export interface NFTMetadata {
+  name: string;
+  description: string;
+  image: string;
+  external_url: string;
+}

@@ -14,7 +14,8 @@ export const useGiftBox = () => {
   const wrap = async (
     giftee: string,
     contractAddress: string,
-    tokenId: BigNumber
+    tokenId: BigNumber,
+    giftCid: string
   ) => {
     if (!wallet.isWalletConnected) {
       throw Error("Wallet not yet connected");
@@ -23,7 +24,10 @@ export const useGiftBox = () => {
     const giftBoxAddress = staticConfig.contracts.GiftBox.address;
     const giftBox = GiftBox__factory.connect(giftBoxAddress, wallet.signer);
     const initialSupply = await giftBox.totalSupply();
-    const receipt = await track("Minting the Gift Box", giftBox.mint(giftee));
+    const receipt = await track(
+      "Minting the Gift Box",
+      giftBox.mint(giftee, `ipfs://${giftCid}`)
+    );
     const events = await giftBox.queryFilter(
       giftBox.filters.GiftMinted(),
       receipt.blockHash
@@ -65,11 +69,29 @@ export const useGiftBox = () => {
   };
 
   const unwrap = async (giftId: BigNumber, secret: string) => {
-    if (wallet.isWalletConnected) {
-      const giftBoxAddress = staticConfig.contracts.GiftBox.address;
-      const giftBox = GiftBox__factory.connect(giftBoxAddress, wallet.signer);
-      await giftBox.open(giftId, secret);
+    if (!wallet.isWalletConnected) {
+      throw Error("Wallet not yet connected");
     }
+    const giftBoxAddress = staticConfig.contracts.GiftBox.address;
+    const giftBox = GiftBox__factory.connect(giftBoxAddress, wallet.signer);
+    const receipt = await track(
+      "Opening the gift box",
+      giftBox.open(giftId, secret)
+    );
+    const events = await giftBox.queryFilter(
+      giftBox.filters.GiftOpened(),
+      receipt.blockHash
+    );
+    console.log(events);
+    console.log(giftId);
+    const matching = events.find((event) => event.args.giftId.eq(giftId));
+    if (!matching) {
+      throw new Error("Unable to find the tokenId");
+    }
+    return {
+      contractAddress: matching.args.tokenContract,
+      tokenId: matching.args.tokenId,
+    };
   };
   return { wrap, unwrap };
 };
