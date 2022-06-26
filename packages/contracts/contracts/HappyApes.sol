@@ -18,7 +18,18 @@ contract HappyApes is ERC721Enumerable {
     return newTokenId;
   }
 
-  function tokenURI(uint256) public pure override returns (string memory) {
-    return "ipfs://bafkreicx7ajphkeflg5tfdnfx2mvawzjng23zi3mdmg2s37voyqxxrz4je";
+  function tokenURI(uint256 tokenId)
+    public
+    pure
+    override
+    returns (string memory)
+  {
+    if ((tokenId % 2) == 0) {
+      return
+        "ipfs://bafkreicx7ajphkeflg5tfdnfx2mvawzjng23zi3mdmg2s37voyqxxrz4je";
+    } else {
+      return
+        "ipfs://bafkreiaqfjht6shdjcvgcehl3tloyqh4rju2j7h6lgpg7uwamuynhddn4i";
+    }
   }
 }

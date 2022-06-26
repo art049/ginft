@@ -1,6 +1,8 @@
+import { IERC721Metadata__factory } from "@ginft/contracts/dist/typechain";
 import axios from "axios";
-import { BigNumber, utils } from "ethers";
+import { BigNumber, Signer, utils } from "ethers";
 import { staticConfig } from "./config";
+import { NFTMetadata } from "./interfaces";
 
 export const storeGlobal = (name: string, value: any) => {
   if (typeof window !== "undefined") {
@@ -51,4 +53,24 @@ export const uploadObjectToIpfs = async (
   });
   const cid = res.data?.value?.cid as string;
   return cid;
+};
+
+export const getNFTMetadata = async (
+  contractAddress: string,
+  tokenId: BigNumber,
+  signer: Signer
+) => {
+  const nftContract = IERC721Metadata__factory.connect(contractAddress, signer);
+  const tokenURI = await nftContract.tokenURI(tokenId);
+  const res = await axios.get(
+    `https://ipfs.io/ipfs/${tokenURI.slice("ipfs://".length)}`
+  );
+  return res.data as NFTMetadata;
+};
+
+export const ipfsToUrl = (ipfsURI: string): string => {
+  if (ipfsURI.startsWith("ipfs://")) {
+    return `https://ipfs.io/ipfs/${ipfsURI.slice("ipfs://".length)}`;
+  }
+  return ipfsURI;
 };

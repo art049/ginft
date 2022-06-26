@@ -55,7 +55,7 @@ const WrapStep = (props: PickStepsProps) => {
           </Text>
           <Text>
             <Text fontWeight="bold">Gift message:</Text>{" "}
-            {props.customizationData?.name}
+            {props.customizationData?.message}
           </Text>
         </VStack>
         <PrimaryButton onClick={onWrap} isLoading={isWrapping}>

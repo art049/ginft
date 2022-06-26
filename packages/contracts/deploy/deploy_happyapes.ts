@@ -27,6 +27,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     await executeTx(happ.mint(deployer));
     await executeTx(happ.mint(deployer));
     await executeTx(happ.mint(deployer));
+    await executeTx(happ.mint(deployer));
+    await executeTx(happ.mint(deployer));
+    await executeTx(happ.mint(deployer));
   }
 };
 export default func;

@@ -1,6 +1,9 @@
-import { Box, SimpleGrid, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { Image, SimpleGrid, Skeleton, Text, VStack } from "@chakra-ui/react";
 import { useUserNFTs } from "src/hooks/useUserNFTs";
+import { useWallet } from "src/hooks/useWallet";
 import { NFTToWrap } from "src/interfaces";
+import { ipfsToUrl } from "src/util";
+import { ConnectWalletButton } from "../Button";
 import { StepContent, StepHeading } from "./StepContent";
 
 interface PickStepsProps {
@@ -9,6 +12,7 @@ interface PickStepsProps {
 
 const PickStep = (props: PickStepsProps) => {
   const { isLoaded, tokens } = useUserNFTs();
+  const wallet = useWallet();
   return (
     <StepContent>
       <StepHeading>
@@ -16,43 +20,48 @@ const PickStep = (props: PickStepsProps) => {
           Pick the NFT you would like to gift
         </StepHeading.Header>
       </StepHeading>
-      <SimpleGrid columns={4} spacing={10}>
-        {isLoaded
-          ? tokens.map((token) => (
-              <VStack
-                key={`${token.contractAddress}-${token.tokenId}`}
-                align="left"
-                bg="white"
-                w="100%"
-                rounded={6}
-                spacing={4}
-                shadow="md"
-                cursor="pointer"
-                _hover={{
-                  shadow: "lg",
-                  border: "outline",
-                }}
-                overflow="hidden"
-                pb={6}
-                onClick={() => props.onValidate(token)}
-              >
-                <Box bg="tomato" width="100%" height="100px">
-                  {token.tokenId}
-                </Box>
-                <VStack>
-                  <Text fontWeight="bold" color="gray.700" fontSize="md">
-                    NFT name
-                  </Text>
-                  <Text fontWeight="semibold" color="gray.500" fontSize="xs">
-                    Collection name
-                  </Text>
+      {!wallet.isWalletConnected && (
+        <VStack pb={6}>
+          <ConnectWalletButton />
+        </VStack>
+      )}
+      {wallet.isWalletConnected && (
+        <SimpleGrid columns={4} spacing={10}>
+          {isLoaded
+            ? tokens.map((token) => (
+                <VStack
+                  key={`${token.contractAddress}-${token.tokenId}`}
+                  align="left"
+                  bg="white"
+                  w="100%"
+                  rounded={6}
+                  spacing={4}
+                  shadow="md"
+                  cursor="pointer"
+                  _hover={{
+                    shadow: "lg",
+                    border: "outline",
+                  }}
+                  overflow="hidden"
+                  pb={6}
+                  onClick={() => props.onValidate(token)}
+                >
+                  <Image src={ipfsToUrl(token.metadata.image)} />
+                  <VStack>
+                    <Text fontWeight="bold" color="gray.700" fontSize="md">
+                      {token.metadata.name}
+                    </Text>
+                    <Text fontWeight="semibold" color="gray.500" fontSize="xs">
+                      # {token.tokenId}
+                    </Text>
+                  </VStack>
                 </VStack>
-              </VStack>
-            ))
-          : [0, 1, 2, 3].map((i) => (
-              <Skeleton height="200px" width="100%" key={i}></Skeleton>
-            ))}
-      </SimpleGrid>
+              ))
+            : [0, 1, 2, 3].map((i) => (
+                <Skeleton height="200px" width="100%" key={i}></Skeleton>
+              ))}
+        </SimpleGrid>
+      )}
     </StepContent>
   );
 };

@@ -1,7 +1,8 @@
 import { HappyApes__factory } from "@ginft/contracts/dist/typechain";
-import { BigNumber } from "ethers";
 import { createContext, useContext, useEffect, useState } from "react";
 import { staticConfig } from "src/config";
+import { NFTMetadata } from "src/interfaces";
+import { getNFTMetadata } from "src/util";
 import { useWallet } from "./useWallet";
 
 export const UserNFTsContext = createContext<UserNFTsContext>({
@@ -38,10 +39,13 @@ export const UserNFTsProvider: React.FC = ({ children }) => {
         console.log(tokenIds);
         setContext({
           isLoaded: true,
-          tokens: tokenIds.map((tid) => ({
-            tokenId: tid.toNumber(),
-            contractAddress: happ.address,
-          })),
+          tokens: await Promise.all(
+            tokenIds.map(async (tid) => ({
+              tokenId: tid.toNumber(),
+              contractAddress: happ.address,
+              metadata: await getNFTMetadata(happ.address, tid, wallet.signer),
+            }))
+          ),
         });
       };
       fetchNFTs();
@@ -61,7 +65,8 @@ export const UserNFTsProvider: React.FC = ({ children }) => {
 
 interface UserNFT {
   contractAddress: string;
-  tokenId: BigNumber;
+  tokenId: number;
+  metadata: NFTMetadata;
 }
 
 interface UserNFTsContext {
