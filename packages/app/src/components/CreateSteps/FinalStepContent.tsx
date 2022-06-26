@@ -1,4 +1,4 @@
-import { Center, Text } from "@chakra-ui/react";
+import { Center, Text, VStack } from "@chakra-ui/react";
 import { StepContent, StepHeading } from "./StepContent";
 
 interface FinalStepProps {
@@ -11,14 +11,24 @@ const FinalStep = (props: FinalStepProps) => {
       <StepHeading>
         <StepHeading.Header>Congratulation !</StepHeading.Header>
         <StepHeading.SubHeader>
-          Your gift is retained in our northpole warehouse until the recipient
-          opens it with the following link:
+          Your gift is retained in our northpole warehouse...
         </StepHeading.SubHeader>
       </StepHeading>
 
-      <Center mt="30px">
-        <Text fontSize="xs">{props.unwrapUrl}</Text>
-      </Center>
+      <VStack>
+        <Text color="gray.500" fontSize="sm">
+          Give this link to the recipient when they have to open the box
+        </Text>
+        <Center
+          p={4}
+          bg="gray.100"
+          border="solid"
+          borderColor="gray.300"
+          borderRadius="8px"
+        >
+          <Text fontSize="xs">{props.unwrapUrl}</Text>
+        </Center>
+      </VStack>
     </StepContent>
   );
 };

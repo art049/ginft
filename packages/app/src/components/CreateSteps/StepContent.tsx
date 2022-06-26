@@ -3,7 +3,7 @@ import React from "react";
 
 export const StepContent: React.FC = (props) => (
   <Box
-    mt="48px"
+    mt="24px"
     bg="background.card"
     p={8}
     borderRadius="lg"

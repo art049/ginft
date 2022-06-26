@@ -26,8 +26,12 @@ const PickStep = (props: PickStepsProps) => {
                 w="100%"
                 rounded={6}
                 spacing={4}
-                shadow="card"
+                shadow="md"
                 cursor="pointer"
+                _hover={{
+                  shadow: "lg",
+                  border: "outline",
+                }}
                 overflow="hidden"
                 pb={6}
                 onClick={() => props.onValidate(token)}
@@ -45,11 +49,9 @@ const PickStep = (props: PickStepsProps) => {
                 </VStack>
               </VStack>
             ))
-          : [
-              <Skeleton height="100px" width="100px" key={1}></Skeleton>,
-              <Skeleton height="100px" width="100px" key={2}></Skeleton>,
-              <Skeleton height="100px" width="100px" key={3}></Skeleton>,
-            ]}
+          : [0, 1, 2, 3].map((i) => (
+              <Skeleton height="200px" width="100%" key={i}></Skeleton>
+            ))}
       </SimpleGrid>
     </StepContent>
   );

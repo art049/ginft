@@ -32,7 +32,7 @@ const CreateSteps = () => {
     <>
       <Steps
         activeStep={activeStep}
-        width="100%"
+        width="90%"
         mt="24px"
         colorScheme="purple"
         labelOrientation="vertical"

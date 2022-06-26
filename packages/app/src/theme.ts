@@ -29,7 +29,7 @@ export const theme = extendTheme({
       layout: "#f7fafc",
       card: "#FFFFFF",
     },
-    demos: {
+    ginft: {
       primary: "#8c30f5",
       mint: "#59baa7",
       gradient: {
@@ -111,7 +111,7 @@ export const theme = extendTheme({
       variants: {
         demos: {
           filledTrack: {
-            backgroundColor: "demos.primary",
+            backgroundColor: "ginft.primary",
           },
         },
       },

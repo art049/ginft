@@ -19,7 +19,7 @@ export const PrimaryButton: typeof ChakraButton = (props) => {
     <Button
       variant="solid"
       color="text.light"
-      bg="demos.gradient.default"
+      bg="ginft.gradient.default"
       size="sm"
       _hover={{ bg: "demos.gradient.hover" }}
       {...props}
@@ -31,7 +31,7 @@ export const SecondaryButton: typeof ChakraButton = (props) => {
   return (
     <Button
       variant="outline"
-      color="demos.primary"
+      color="ginft.primary"
       _hover={{ bg: "purple.100" }}
       size="sm"
       borderColor="demos.primary"

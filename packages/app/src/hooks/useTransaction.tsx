@@ -8,7 +8,7 @@ import {
   Spinner,
   useToast,
 } from "@chakra-ui/react";
-import { ContractTransaction } from "ethers";
+import { ContractReceipt, ContractTransaction } from "ethers";
 import { createContext, useContext } from "react";
 import { useWallet } from "./useWallet";
 
@@ -53,7 +53,7 @@ export const TransactionProvider: React.FC = ({ children }) => {
         />
       ),
     });
-    await tx.wait();
+    const receipt = await tx.wait();
     toastId && toast.close(toastId);
     toast({
       title: scope,
@@ -61,6 +61,7 @@ export const TransactionProvider: React.FC = ({ children }) => {
       status: "success",
       isClosable: true,
     });
+    return receipt;
   };
 
   return (
@@ -71,7 +72,10 @@ export const TransactionProvider: React.FC = ({ children }) => {
 };
 
 interface TransactionContext {
-  track: (scope: string, transaction: Promise<ContractTransaction>) => void;
+  track: (
+    scope: string,
+    transaction: Promise<ContractTransaction>
+  ) => ContractReceipt;
 }
 
 const LoadingToast: React.FC<any> = (props) => {

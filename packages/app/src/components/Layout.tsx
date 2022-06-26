@@ -1,4 +1,4 @@
-import { Flex, VStack } from "@chakra-ui/react";
+import { Flex, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 import { ConnectWalletButton } from "./Button";
@@ -16,7 +16,11 @@ const Layout: React.FC<LayoutProps> = ({ noLogout, children }) => (
       alignItems="center"
     >
       <Link href="/">
-        <a>{/* <Logo /> */}</a>
+        <a>
+          <Text fontWeight="bold" fontSize="2xl" color="ginft.primary">
+            GiNFT
+          </Text>
+        </a>
       </Link>
       {noLogout || (
         <Flex>
@@ -27,6 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ noLogout, children }) => (
     <VStack
       spacing={8}
       p={8}
+      pt={1}
       w={{ base: "100%", md: "75vw", lg: "65vw", xl: "60vw" }}
     >
       {children}

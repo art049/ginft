@@ -22,9 +22,7 @@ const CustomizeStep = (props: CustomizeStepProps) => {
   return (
     <StepContent>
       <StepHeading>
-        <StepHeading.Header>
-          What should the gift look like ?
-        </StepHeading.Header>
+        <StepHeading.Header>What should the box look like ?</StepHeading.Header>
       </StepHeading>
       <form onSubmit={handleSubmit(props.onValidate)}>
         <VStack spacing={4}>

@@ -5,10 +5,12 @@ import {
 import { BigNumber, ethers } from "ethers";
 import { hexlify, solidityKeccak256 } from "ethers/lib/utils";
 import { staticConfig } from "src/config";
+import { useTransaction } from "./useTransaction";
 import { useWallet } from "./useWallet";
 
 export const useGiftBox = () => {
   const wallet = useWallet();
+  const { track } = useTransaction();
   const wrap = async (
     giftee: string,
     contractAddress: string,
@@ -21,8 +23,7 @@ export const useGiftBox = () => {
     const giftBoxAddress = staticConfig.contracts.GiftBox.address;
     const giftBox = GiftBox__factory.connect(giftBoxAddress, wallet.signer);
     const initialSupply = await giftBox.totalSupply();
-    const tx = await giftBox.mint(giftee);
-    const receipt = await tx.wait();
+    const receipt = await track("Minting the Gift Box", giftBox.mint(giftee));
     const events = await giftBox.queryFilter(
       giftBox.filters.GiftMinted(),
       receipt.blockHash
@@ -47,11 +48,14 @@ export const useGiftBox = () => {
       contractAddress,
       wallet.signer
     );
-    await nftContract["safeTransferFrom(address,address,uint256,bytes)"](
-      wallet.userAddress,
-      giftBox.address,
-      tokenId,
-      hashedSecret
+    await track(
+      "Locking the NFT in the Gift",
+      nftContract["safeTransferFrom(address,address,uint256,bytes)"](
+        wallet.userAddress,
+        giftBox.address,
+        tokenId,
+        hashedSecret
+      )
     );
     const hexSecret = hexlify(secret);
     console.log("NFT deposited");

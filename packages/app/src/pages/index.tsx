@@ -22,7 +22,7 @@ const Home: NextPage = () => {
           <Flex
             direction="column"
             textAlign="center"
-            mb={{ sm: "25px", md: "45px" }}
+            mb={{ sm: "15px", md: "25px" }}
           >
             <Text
               color="gray.700"
