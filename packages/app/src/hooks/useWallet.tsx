@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { staticConfig } from "../config";
 import { storeGlobal } from "../util";
-import { Venture } from "./useVentures";
 
 interface WalletContextNotLoaded {
   isLoaded: false;
@@ -51,7 +50,6 @@ type WalletContext = WalletContextData & {
   disconnectWallet: () => Promise<void>;
   connectWallet: () => Promise<void>;
   checkWallet: () => Promise<void>;
-  addVentureToWallet: (venture: Venture) => Promise<void>;
 };
 
 const STATIC_ONBOARD_CONFIG = {
@@ -91,7 +89,7 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const onboard = Onboard({
-      dappId: staticConfig.blockNativeAPIKey,
+      // dappId: staticConfig.blockNativeAPIKey,
       networkId: staticConfig.chainID,
       networkName: staticConfig.networkName,
       subscriptions: {
@@ -193,27 +191,6 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   };
 
-  const addVentureToWallet = async (venture: Venture) => {
-    if (context.isWalletConnected) {
-      try {
-        await context.provider.send("wallet_watchAsset", [
-          {
-            type: "ERC20",
-            options: {
-              address: await venture.contract.ventureToken(),
-              name: `${venture.name} Venture Token`,
-              symbol: `v${venture.symbol}`,
-              decimals: 18,
-              image: `http://localhost:3000/ventures/${venture.symbol}/logo.png`,
-            },
-          },
-        ]);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
-
   return (
     <WalletContext.Provider
       value={{
@@ -221,7 +198,6 @@ export const WalletProvider: React.FC = ({ children }) => {
         disconnectWallet,
         connectWallet,
         checkWallet,
-        addVentureToWallet,
       }}
     >
       {children}
@@ -236,7 +212,6 @@ export const WalletContext = createContext<WalletContext>({
   disconnectWallet: async () => {},
   connectWallet: async () => {},
   checkWallet: async () => {},
-  addVentureToWallet: async (venture: Venture) => {},
 });
 
 export const useWallet = () => useContext(WalletContext);

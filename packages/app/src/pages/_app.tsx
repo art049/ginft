@@ -3,6 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppContext, AppProps } from "next/app";
 import App from "next/app";
 import Head from "next/head";
+import { UserNFTsProvider } from "src/hooks/useUserNFTs";
 import { WalletProvider } from "src/hooks/useWallet";
 import { theme } from "src/theme";
 import { ErrorCatcher } from "../components/ErrorBoundary";
@@ -19,11 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={theme}>
         <ErrorCatcher>
           <WalletProvider>
-            <ApolloProvider client={apolloClient}>
-              <TransactionProvider>
-                <Component {...pageProps} />
-              </TransactionProvider>
-            </ApolloProvider>
+            <UserNFTsProvider>
+              <ApolloProvider client={apolloClient}>
+                <TransactionProvider>
+                  <Component {...pageProps} />
+                </TransactionProvider>
+              </ApolloProvider>
+            </UserNFTsProvider>
           </WalletProvider>
         </ErrorCatcher>
       </ChakraProvider>

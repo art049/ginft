@@ -49,7 +49,6 @@ export const ConnectWalletButton = () => {
     if (wallet.isLoaded) {
       wallet.disconnectWallet();
       apolloClient.clearStore();
-      router.push("/connect");
     }
   };
 

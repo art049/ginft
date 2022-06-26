@@ -60,11 +60,11 @@ const config: HardhatUserConfig = {
     hardhat: {
       live: false,
       initialDate: "2020-01-01",
+      chainId: 1337,
     },
     // network used when running "hardhat node".
     localhost: {
       url: "http://localhost:8545",
-      chainId: 1337,
     },
     demos: {
       mining: {

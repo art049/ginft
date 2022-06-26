@@ -2,7 +2,6 @@ import { Flex, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 import { ConnectWalletButton } from "./Button";
-import { Logo } from "./Logo";
 interface LayoutProps {
   noLogout?: boolean;
 }
@@ -17,9 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ noLogout, children }) => (
       alignItems="center"
     >
       <Link href="/">
-        <a>
-          <Logo />
-        </a>
+        <a>{/* <Logo /> */}</a>
       </Link>
       {noLogout || (
         <Flex>

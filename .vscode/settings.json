@@ -6,5 +6,8 @@
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
   }
 }
