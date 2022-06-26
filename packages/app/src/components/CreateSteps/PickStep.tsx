@@ -1,4 +1,5 @@
 import { Image, SimpleGrid, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { BigNumber } from "ethers";
 import { useUserNFTs } from "src/hooks/useUserNFTs";
 import { useWallet } from "src/hooks/useWallet";
 import { NFTToWrap } from "src/interfaces";
@@ -44,7 +45,12 @@ const PickStep = (props: PickStepsProps) => {
                   }}
                   overflow="hidden"
                   pb={6}
-                  onClick={() => props.onValidate(token)}
+                  onClick={() =>
+                    props.onValidate({
+                      tokenId: BigNumber.from(token.tokenId),
+                      contractAddress: token.contractAddress,
+                    })
+                  }
                 >
                   <Image src={ipfsToUrl(token.metadata.image)} />
                   <VStack>
